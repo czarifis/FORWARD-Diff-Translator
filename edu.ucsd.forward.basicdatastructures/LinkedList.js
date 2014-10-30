@@ -36,16 +36,22 @@ function assertObject(x) {
 }
 
 
-
 /*
  * This defines the doubly linked list node
  */
 
 function LinkedListNode() {
+
+    // The ID of a node is the same as the id of the data(treeNode) that is getting hung under it
     this.id = null;
+
+    // Will be used to hang the treeNode
     this.data = null;
+
+    // next sibling
     this.next = null;
-    // this.annotation = null; // Not sure if we have to keep annotations at this level...
+
+    // previous sibling
     this.previous = null;
 }
 
@@ -255,10 +261,6 @@ LinkedList.prototype.delDataWithID = function(delID) {
         deletedNode.next = null;
         deletedNode.previous=null;
     }
-
-
-
-
 
 };
 
