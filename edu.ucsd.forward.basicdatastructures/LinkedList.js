@@ -18,7 +18,7 @@ function assertDefined(x) {
 }
 
 function assertNonNull(x) {
-    assert((x !== undefined && x !== null),x+' is either undefined or null');
+    assert((x !== null),'Value is null');
 }
 
 function assertType(x, type) {
@@ -112,35 +112,35 @@ LinkedList.prototype.pushData = function(data){
 
 };
 
-// Inserts a node into the linked list right before the node with id: soonToBeNextID
-LinkedList.prototype.addDataBeforeID = function(soonToBeNextID, data){
+// Inserts a node into the linked list right before the node with id: nextID
+LinkedList.prototype.addDataBeforeID = function(nextID, data){
 
     //asserting
 
     assertDefined(data);
     assertNonNull(data);
     assertObject(data);
-    assertDefined(soonToBeNextID);
-    assertNonNull(soonToBeNextID);
-    assertNumber(soonToBeNextID);
+    assertDefined(nextID);
+    assertNonNull(nextID);
+    assertNumber(nextID);
     assert(data.hasOwnProperty('id'),'data does not have property: id');
 
 
-    // check performed... Let's add data before node with id: soonToBeNextID
+    // check performed... Let's add data before node with id: nextID
     var newNode = new LinkedListNode();
     newNode.data = data;
     newNode.id = data.id;
 
     // Linked List is empty so there is no such ID
     if(this.head===null){
-        return undefined;
+        throw 'Linked list is empty so given ID could not be found'
     }
 
-    var nextNode = this.searchForID(soonToBeNextID);
+    var nextNode = this.searchForID(nextID);
 
     // Checking if there is no node with the given ID
     if(nextNode===null){
-        return undefined;
+        throw 'Given ID was not found';
     }
     newNode.next = nextNode;
 
@@ -158,39 +158,45 @@ LinkedList.prototype.addDataBeforeID = function(soonToBeNextID, data){
 };
 
 // Inserts a node into the linked list right after the node with id: soonToBePrevID
-LinkedList.prototype.addDataAfterID = function(soonToBePrevID, data){
+LinkedList.prototype.addDataAfterID = function(prevID, data){
 
     //asserting
 
     assertDefined(data);
     assertNonNull(data);
     assertObject(data);
-    assertDefined(soonToBePrevID);
-    assertNonNull(soonToBePrevID);
-    assertNumber(soonToBePrevID);
+    assertDefined(prevID);
+    assertNonNull(prevID);
+    assertNumber(prevID);
     assert(data.hasOwnProperty('id'),'data does not have property: id');
 
-    // check performed... Let's add data after node with id: soonToBePrevID
+    // check performed... Let's add data after node with id: prevID
     var newNode = new LinkedListNode();
     newNode.data = data;
     newNode.id = data.id;
 
     // Linked List is empty so there is no such ID
     if(this.head===null) {
-        return undefined;
+        throw 'Linked list is empty so given ID could not be found';
     }
 
-    var prevNode = this.searchForID(soonToBePrevID);
+    var prevNode = this.searchForID(prevID);
 
     // Checking if there is no node with the given ID
     if(prevNode===null){
-        return undefined;
+        throw 'Given ID was not found';
     }
 
     newNode.previous = prevNode;
-    prevNode.next.previous = newNode;
+
+    // If this is the last element update the Linked list's tail.
+    if(prevNode.next!==null)
+        prevNode.next.previous = newNode;
+    else
+        this.tail=newNode;
     newNode.next = prevNode.next;
     prevNode.next = newNode;
+
 
     this.size++;
 
@@ -198,28 +204,56 @@ LinkedList.prototype.addDataAfterID = function(soonToBePrevID, data){
 
 
 // Delete a node with a specific ID from the linked list
-LinkedList.prototype.addDataAfterID = function(delID) {
+LinkedList.prototype.delDataWithID = function(delID) {
     assertDefined(delID);
     assertNonNull(delID);
     assertNumber(delID);
 
     //checking if linked list is empty
     if(this.head===null){
-        return undefined;
+        throw 'Linked list is empty so given ID could not be found';
     }
 
-
-    var aboutToGetDeleted = this.searchForID(delID);
+    var deletedNode = this.searchForID(delID);
 
     // Checking if there is no node with the given ID
-    if(aboutToGetDeleted===null){
-        return undefined;
+    if(deletedNode===null){
+        throw 'Given ID could not be found';
     }
     if(this.size===1){
+        deletedNode.data = null;
+        deletedNode.id =null;
         this.head=null;
         this.tail=null;
-        this.size=null;
+        this.size--;
         return;
+    }
+
+    // deleting element from the head
+    if(this.head.id===deletedNode.id){
+        deletedNode.data = null;
+        deletedNode.id = null;
+        this.head = deletedNode.next;
+        deletedNode.next.previous=null;
+        deletedNode.next = null;
+        this.size--;
+        return;
+    }else if(this.tail.id===deletedNode.id){ // deleting element from the tail
+        deletedNode.data = null;
+        deletedNode.id = null;
+        this.tail = deletedNode.previous;
+        deletedNode.previous.next = null;
+        deletedNode.previous = null;
+        this.size--;
+        return
+    }else{ // deleting an intermediate element
+        deletedNode.previous.next = deletedNode.next;
+        deletedNode.next.previous = deletedNode.previous;
+
+        deletedNode.id = null;
+        deletedNode.data = null;
+        deletedNode.next = null;
+        deletedNode.previous=null;
     }
 
 
@@ -325,16 +359,16 @@ LinkedList.prototype.printLinkedList = function(){
 //
 //    };
 //
-//    this.addDataBeforeID = function(soonToBeNextID, data){
+//    this.addDataBeforeID = function(nextID, data){
 //
 //        //asserting
 //
 //        assertDefined(data);
 //        assertNonNull(data);
 //        assertObject(data);
-//        assertDefined(soonToBeNextID);
-//        assertNonNull(soonToBeNextID);
-//        assertNumber(soonToBeNextID);
+//        assertDefined(nextID);
+//        assertNonNull(nextID);
+//        assertNumber(nextID);
 //
 //
 //        // check performed...
@@ -347,7 +381,7 @@ LinkedList.prototype.printLinkedList = function(){
 //            return undefined;
 //        }
 //
-//        var nextNode = this.searchForID(soonToBeNextID);
+//        var nextNode = this.searchForID(nextID);
 //        newNode.next = nextNode;
 //        nextNode.previous.next = newNode;
 //        newNode.previous = nextNode.previous;
