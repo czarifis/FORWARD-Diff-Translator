@@ -66,34 +66,6 @@ function addMultipleElementsTest(){
 }
 
 
-function addMultipleElementsAndDeleteSomeTest(){
-
-    var ll = new LinkedList();
-    var IDArr = [];
-
-    for(var i=0; i<10;i++){
-        var ActualID = guid();
-        IDArr.push(ActualID);
-        var d = {
-            id : ActualID,
-            one: 'oneItem'+i,
-            two: 'twoItem'+i,
-            nestedOne: {
-                nested:'one'+i
-            }
-        };
-        ll.pushData(d);
-    }
-
-
-    ll.printLinkedList();
-
-    var searchingForId = IDArr[4];
-    console.log('found element with id:',searchingForId,' ',ll.searchForID(searchingForId));
-}
-
-
-
 function addMultipleElementsAndinsertAnElementBeforeSpecifiedIDTest(){
 
     var ll = new LinkedList();
@@ -165,10 +137,41 @@ function addMultipleElementsAndinsertAnElementAfterSpecifiedIDTest(){
 
     ll.printLinkedList();
 
-    var searchingForId = IDArr[0];
-    console.log('inserting before element with ID:',searchingForId);
+    var searchingForId = IDArr[9];
+    console.log('inserting element:',data.id,'after element with ID:',searchingForId);
 
     ll.addDataAfterID(searchingForId,data);
+    console.log('final Linked List:');
+    ll.printLinkedList();
+}
+
+
+
+function addMultipleElementsAndDeleteSomeTest(){
+
+    var ll = new LinkedList();
+    var IDArr = [];
+
+    for(var i=0; i<10;i++){
+        var ActualID = guid();
+        IDArr.push(ActualID);
+        var d = {
+            id : ActualID,
+            one: 'oneItem'+i,
+            two: 'twoItem'+i,
+            nestedOne: {
+                nested:'one'+i
+            }
+        };
+        ll.pushData(d);
+    }
+
+    ll.printLinkedList();
+
+    var searchingForId = IDArr[3];
+    console.log('Deleting element with ID:',searchingForId);
+
+    ll.delDataWithID(searchingForId)
     console.log('final Linked List:');
     ll.printLinkedList();
 }
