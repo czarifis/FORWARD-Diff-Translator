@@ -70,6 +70,8 @@ function LinkedList() {
     // size of list
     this.size = 0;
 
+    this.llHashTable = new LLHashTable();
+
 }
 
 // ################################## //
@@ -115,6 +117,7 @@ LinkedList.prototype.pushData = function(data){
         newNode.previous = this.tail;
         this.tail = newNode;
     }
+    this.llHashTable.add(newNode);
 
 };
 
@@ -161,6 +164,8 @@ LinkedList.prototype.addDataBeforeID = function(nextID, data){
     newNode.previous = nextNode.previous;
     nextNode.previous = newNode;
     this.size++;
+
+    this.llHashTable.add(newNode);
 };
 
 // Inserts a node into the linked list right after the node with id: soonToBePrevID
@@ -206,6 +211,8 @@ LinkedList.prototype.addDataAfterID = function(prevID, data){
 
     this.size++;
 
+    this.llHashTable.add(newNode);
+
 };
 
 
@@ -242,16 +249,14 @@ LinkedList.prototype.delDataWithID = function(delID) {
         this.head = deletedNode.next;
         deletedNode.next.previous=null;
         deletedNode.next = null;
-        this.size--;
-        return;
+
     }else if(this.tail.id===deletedNode.id){ // deleting element from the tail
         deletedNode.data = null;
         deletedNode.id = null;
         this.tail = deletedNode.previous;
         deletedNode.previous.next = null;
         deletedNode.previous = null;
-        this.size--;
-        return
+
     }else{ // deleting an intermediate element
         deletedNode.previous.next = deletedNode.next;
         deletedNode.next.previous = deletedNode.previous;
@@ -261,6 +266,11 @@ LinkedList.prototype.delDataWithID = function(delID) {
         deletedNode.next = null;
         deletedNode.previous=null;
     }
+    this.llHashTable.remove(delID);
+    this.size--;
+    return;
+
+
 
 };
 
@@ -271,13 +281,6 @@ LinkedList.prototype.delDataWithID = function(delID) {
 
 
 
-
-
-/**
- * IT WOULD BE OPTIMAL O(1) IF WE HAD A HASHMAP[ID]->NODE INSTEAD...
- * @param givenID
- * @returns {null|*}
- */
 // Searches for node with a given ID
 LinkedList.prototype.searchForID = function(givenID){
 
@@ -287,16 +290,19 @@ LinkedList.prototype.searchForID = function(givenID){
     assertNonNull(givenID);
     assertNumber(givenID);
 
+    console.log('Yay searched linked list node using the LinkedListHastTable');
+    return this.llHashTable.get(givenID);
 
-    var curr = this.head;
-    while(curr !== null){
-        if(curr.id==givenID){
-            console.log('Found it!');
-            return curr;
-        }
-        curr = curr.next;
-    }
-    return null;
+//
+//    var curr = this.head;
+//    while(curr !== null){
+//        if(curr.id==givenID){
+//            console.log('Found it!');
+//            return curr;
+//        }
+//        curr = curr.next;
+//    }
+//    return null;
 
 };
 
