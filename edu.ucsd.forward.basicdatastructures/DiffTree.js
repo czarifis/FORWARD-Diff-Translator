@@ -130,7 +130,7 @@ Tree.prototype.printBFS = function(){
             }
         }
     }
-};
+}; 
 
 Tree.prototype.addSubtree = function(parent, jsonSubtree,labelIfPrimitive){
     console.log('arguments:','parent:',parent,'node:',jsonSubtree);
