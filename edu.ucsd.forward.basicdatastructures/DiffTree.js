@@ -110,6 +110,8 @@ Tree.prototype.printTree = function(){
  */
 Tree.prototype.printBFS = function(){
 
+
+    console.log('### BFS Printing ###');
     var stack = [];
     var depth = [];
     stack.push(this.root);
@@ -130,7 +132,7 @@ Tree.prototype.printBFS = function(){
             }
         }
     }
-}; 
+};
 
 Tree.prototype.addSubtree = function(parent, jsonSubtree,labelIfPrimitive){
     console.log('arguments:','parent:',parent,'node:',jsonSubtree);
@@ -139,7 +141,7 @@ Tree.prototype.addSubtree = function(parent, jsonSubtree,labelIfPrimitive){
     var newTreeNode = new TreeNode();
 
 
-    console.log('what is this?');
+    console.log('what is the input?');
 
     if (typeof jsonSubtree == 'object') {
         // Input is an object
@@ -159,21 +161,6 @@ Tree.prototype.addSubtree = function(parent, jsonSubtree,labelIfPrimitive){
             console.log(jsonSubtree);
 
 
-
-            // jsonSubtree is going to be attached to the root
-            if(parent===null) {
-                // parent is null so this is the head
-                this.root = newTreeNode;
-            } else {
-                // TODO: Modify this part appropriately...
-                parent.children = new LinkedList();
-                parent.children.pushData(newTreeNode);
-                newTreeNode.parent = parent;
-
-
-            }
-
-
             newTreeNode.id = jsonSubtree.id;
             newTreeNode.label = jsonSubtree.label;
             newTreeNode.children = new LinkedList();
@@ -190,7 +177,7 @@ Tree.prototype.addSubtree = function(parent, jsonSubtree,labelIfPrimitive){
                         if (typeof jsonSubtree[att] == 'object') {
                             console.log('child is object');
                             newChild.label = att;
-                            newChild.id = jsonSubtree[att].id;
+//                            newChild.id = jsonSubtree[att].id;
 
                         }
                         else{
@@ -213,6 +200,26 @@ Tree.prototype.addSubtree = function(parent, jsonSubtree,labelIfPrimitive){
                 }
             }
 
+
+            // jsonSubtree is going to be attached to the root
+            if(parent===null) {
+                // parent is null so this is the head
+                this.root = newTreeNode;
+            } else {
+                // TODO: Modify this part appropriately...
+                if(parent.children===null) // The current node is the first child of the parent
+                    parent.children = new LinkedList();
+
+                newTreeNode.parent = parent;
+//                parent.children = new LinkedList();
+//                parent.children.pushData(newTreeNode);
+//                newTreeNode.parent = parent;
+                parent.children.pushData(newTreeNode);
+
+
+            }
+
+
         }
         else {
 
@@ -222,6 +229,78 @@ Tree.prototype.addSubtree = function(parent, jsonSubtree,labelIfPrimitive){
             // the root of the jsonSubtree holds an array of elements
             for (var i = 0; i < jsonSubtree.length; i++) {
                 console.log(jsonSubtree[i]);
+
+
+
+
+                // create a Tree Node for each child
+
+                for (var att2 in jsonSubtree[i]) {
+
+
+                    if (jsonSubtree[i].hasOwnProperty(att2)) {
+//                        newTreeNode.id = jsonSubtree[i].id;
+                        newTreeNode.label = att2;
+                        newTreeNode.children = new LinkedList();
+                        if((att2!=='id') && (att2!=='label')) {
+
+                            var newChild2 = new TreeNode();
+                            var isChildPrimitive2 = false;
+
+                            for (var att3 in jsonSubtree[i][att2]) {
+
+                                if((att3!=='id') && (att3!=='label')) {
+                                    if (jsonSubtree[i][att2].hasOwnProperty(att3)) {
+                                        if (typeof jsonSubtree[i][att2][att3] == 'object') {
+                                            console.log('child is object');
+                                            newChild2.label = att3;
+                                            //                                newChild2.id = jsonSubtree[i][att2].id;
+
+                                        }
+                                        else {
+                                            console.log('child is primitive');
+                                            newChild2.isLeaf = true;
+                                            newChild2.label = jsonSubtree[i][att2].label;
+                                            newChild2.value = jsonSubtree[i][att2][att3];
+                                            isChildPrimitive2 = true;
+                                        }
+
+                                        newChild2.parent = newTreeNode;
+                                        console.log(att3, " -> ", jsonSubtree[i][att2][att3]);
+                                        console.log('new child created:', newChild2);
+                                        newTreeNode.children.pushData(newChild2);
+
+                                        if (!isChildPrimitive2) {
+                                            this.addSubtree(newChild2, jsonSubtree[i][att2][att3]);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+
+                // jsonSubtree is going to be attached to the root
+                if(parent===null) {
+                    // parent is null so this is the head
+                    this.root = newTreeNode;
+                } else {
+                    // TODO: Modify this part appropriately...
+                    if(parent.children===null) // The current node is the first child of the parent
+                        parent.children = new LinkedList();
+
+                    newTreeNode.parent = parent;
+
+                    parent.children.pushData(newTreeNode);
+
+
+                }
+
+
+
+
             }
         }
     } else {
@@ -250,8 +329,6 @@ Tree.prototype.addSubtree = function(parent, jsonSubtree,labelIfPrimitive){
             newTreeNode.parent = parent;
 
         }
-
-
 
     }
 

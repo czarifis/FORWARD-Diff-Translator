@@ -93,6 +93,7 @@ LinkedList.prototype.getSize = function(){
 // Pushes a node with the given data at the end of this linked list
 LinkedList.prototype.pushData = function(data){
 
+//    console.log('does it work?',JSON.parse(JSON.stringify(data)));
     // asserting...
     assertDefined(data);
     assertNonNull(data);
