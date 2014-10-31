@@ -117,7 +117,8 @@ LinkedList.prototype.pushData = function(data){
         newNode.previous = this.tail;
         this.tail = newNode;
     }
-    this.llHashTable.add(newNode);
+    if(newNode.data.id!==null) // check if primitive
+        this.llHashTable.add(newNode);
 
 };
 
@@ -168,7 +169,7 @@ LinkedList.prototype.addDataBeforeID = function(nextID, data){
     this.llHashTable.add(newNode);
 };
 
-// Inserts a node into the linked list right after the node with id: soonToBePrevID
+// Inserts a node into the linked list right after the node with id: prevID
 LinkedList.prototype.addDataAfterID = function(prevID, data){
 
     //asserting
@@ -268,13 +269,33 @@ LinkedList.prototype.delDataWithID = function(delID) {
     }
     this.llHashTable.remove(delID);
     this.size--;
-    return;
 
 
 
 };
 
 
+// returns the I'th element
+LinkedList.prototype.get = function(i){
+
+    if(i>=this.size){
+        throw 'Index out of bounds'
+    }
+
+    var counter = 0;
+
+    var curr = this.head;
+    while(curr !== null){
+        if(counter==i){
+//            console.log('Found it!');
+            return curr;
+        }
+        counter++;
+        curr = curr.next;
+    }
+    return null;
+
+};
 
 
 

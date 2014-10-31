@@ -84,14 +84,17 @@ LLHashTable.prototype.get = function(id){
 
 LLHashTable.prototype.add = function(listNode){
     assertObject(listNode);
-    assertNumber(listNode.id);
+//    assertNumber(listNode.id);
     assertDefined(listNode.data);
     assertNonNull(listNode.data);
     assertObject(listNode.data);
     assertDefined(listNode.next);
     assertDefined(listNode.previous);
 
-    this.addVal(listNode.id, listNode);
+
+    // it might be a an internal object without an id
+    if(listNode.id!==undefined)
+        this.addVal(listNode.id, listNode);
 };
 
 LLHashTable.prototype.remove = function(id){
@@ -102,6 +105,36 @@ LLHashTable.prototype.remove = function(id){
 
 };
 
+
+/*
+ * Tree Hash Table Class
+ *
+ * Might need to get changed after we finalize the tree node!
+ */
+
+function TreeHashTable(){
+    HashTable.call(this);
+}
+
+TreeHashTable.prototype.getTreeNode = function(id){
+    assertNumber(id);
+
+    return this.getVal(id);
+};
+
+TreeHashTable.prototype.add = function(treeNode){
+    assertObject(treeNode);
+    assertNumber(treeNode.id);
+
+    this.addVal(treeNode.id, treeNode);
+};
+
+TreeHashTable.prototype.remove = function(id){
+    assertDefined(id);
+    assertNonNull(id);
+    assertNumber(id);
+    this.removeKey(id);
+};
 
 
 
