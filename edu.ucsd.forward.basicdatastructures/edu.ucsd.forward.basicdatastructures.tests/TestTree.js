@@ -7,123 +7,107 @@ var guid = function() {
 
 };
 
-function addNodesToTree1(){
+
+function addComplexObjectsWithArrays(){
     var tree = new Tree();
-    var d = {
-        id : guid(),
-        label : 'marker',
-        nestedOne: {
-            id : guid(),
-            label : 'nestedLbl',
-            nested: {
-                id : guid(),
-                label : 'nestedInner',
-                more: 'nestedInnersibling'
+    var map = {
+        id:1,
+        label:'map',
+        children:{
+            zoom:{
+                id:2,
+                value :8
             },
-            nested2: {
-                id : guid(),
-                label : 'nestedInner2',
-                more: 'nestedInnersibling2'
+            markers:{
+                id:3,
+                children:[
+                    {
+                        id:10,
+                        children:{
+                            coords: {
+                                id: 100,
+                                children: {
+                                    latitude: {
+                                        id: 1000,
+                                        value: 40
+                                    },
+                                    longitude: {
+                                        id: 1001,
+                                        value: 40
+                                    }
+
+                                }
+                            }
+                        }
+                    },
+                    {
+                        id:11,
+                        children:{
+                            coords: {
+                                id: 110,
+                                children: {
+                                    latitude: {
+                                        id: 1100,
+                                        value: 40
+                                    },
+                                    longitude: {
+                                        id: 1101,
+                                        value: 40
+                                    }
+
+                                }
+                            }
+                        }
+                    },
+                    {
+                        id:12,
+                        children:{
+                            coords: {
+                                id: 120,
+                                children: {
+                                    latitude: {
+                                        id: 1200,
+                                        value: 40
+                                    },
+                                    longitude: {
+                                        id: 1201,
+                                        value: 40
+                                    }
+
+                                }
+                            }
+                        }
+                    },
+                    {
+                        id:13,
+                        children:{
+                            coords: {
+                                id: 130,
+                                children: {
+                                    latitude: {
+                                        id: 1300,
+                                        value: 40
+                                    },
+                                    longitude: {
+                                        id: 1301,
+                                        value: 40
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+
+
+
+                ]
             }
-        },
-        one: 'OneItem',
-        two: 'twoItem'
 
-    };
-
-    tree.addSubtree(null, d);
-    tree.printBFS();
-}
-
-function addNodesToTree2(){
-    var tree = new Tree();
-
-    var d = {
-        id: guid(),
-        label: 'marker',
-        one: 'OneItem',
-        two: 'twoItem',
-        nestedOne: {
-            id : guid(),
-            label : 'nested',
-            nested: 'one'
         }
     };
-    tree.addSubtree(null, d);
+    tree.generateTree(map);
     tree.printBFS();
 
-}
-
-
-function addNodesWithArraysToTree(){
-
-    var tree = new Tree();
-    var d = {
-        id : guid(),
-        label : 'marker',
-//        nestedOne: {
-//            id : guid(),
-//            label : 'nestedLbl',
-//            nested: {
-//                id : guid(),
-//                label : 'nestedInner',
-//                more: 'nestedInnersibling'
-//            },
-//            nested2: {
-//                id : guid(),
-//                label : 'nestedInner2',
-//                more: 'nestedInnersibling2'
-//            }
-//        },
-//
-//        one: 'OneItem',
-//        two: 'twoItem',
-
-        nestedArr:[
-            {
-                nested1: {
-                    id: guid(),
-                    label: 'nestedInner1',
-                    actual: 'value1'
-                }
-            },
-            {
-                nested2: {
-                    id: guid(),
-                    label: 'nestedInner2',
-                    actual: 'value2'
-                }
-            }
-
-        ]
-    };
-
-    tree.addSubtree(null, d);
-    tree.printBFS();
-}
-
-function addNodesWithArraysToTree2(){
-
-    var tree = new Tree();
-    var d = {
-        id : guid(),
-        label : 'marker',
-        nestedArr:[
-            {
-                nested1: {
-                    label: 'nestedInner1'
-                }
-            },
-            {
-                nested2: {
-                    label: 'nestedInner2'
-                }
-            }
-
-        ]
-    };
-    tree.addSubtree(null, d,null);
-    tree.printBFS();
 }
 
 
@@ -141,11 +125,11 @@ function addComplexObjects(){
             markers:{
                 id:3,
                 label:'markers',
-                children:[
-                    {
-                        id:10,
-                        label:0,
-                        children:{
+                children: {
+                    'lb0': {
+                        id: 10,
+                        label: 0,
+                        children: {
                             coords: {
                                 id: 100,
                                 label: 'coords',
@@ -165,10 +149,10 @@ function addComplexObjects(){
                             }
                         }
                     },
-                    {
-                        id:11,
-                        label:1,
-                        children:{
+                    'lb1': {
+                        id: 11,
+                        label: 1,
+                        children: {
                             coords: {
                                 id: 110,
                                 label: 'coords',
@@ -188,10 +172,10 @@ function addComplexObjects(){
                             }
                         }
                     },
-                    {
-                        id:12,
-                        label:2,
-                        children:{
+                    'lb2': {
+                        id: 12,
+                        label: 2,
+                        children: {
                             coords: {
                                 id: 120,
                                 label: 'coords',
@@ -211,10 +195,10 @@ function addComplexObjects(){
                             }
                         }
                     },
-                    {
-                        id:13,
-                        label:3,
-                        children:{
+                    'lb3': {
+                        id: 13,
+                        label: 3,
+                        children: {
                             coords: {
                                 id: 130,
                                 label: 'coords',
@@ -235,14 +219,14 @@ function addComplexObjects(){
                         }
                     }
 
+                }
 
 
-                ]
             }
 
         }
     };
-    tree.addSubtreeV2(null, map ,null);
+    tree.generateTree(map);
     tree.printBFS();
 
 }
