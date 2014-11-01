@@ -132,7 +132,7 @@ function addComplexObjects(){
     var map = {
         id:1,
         label:'map',
-        value:{
+        children:{
             zoom:{
                 id:2,
                 label:'zoom',
@@ -141,84 +141,100 @@ function addComplexObjects(){
             markers:{
                 id:3,
                 label:'markers',
-                value:[
+                children:[
                     {
                         id:10,
                         label:0,
-                        value:{
-                            id:100,
-                            label:'marker',
-                            value:{
-                                id: 1000,
+                        children:{
+                            coords: {
+                                id: 100,
                                 label: 'coords',
-                                value: {
+                                children: {
                                     latitude: {
-                                        id: 10000,
+                                        id: 1000,
                                         label: 'latitude',
                                         value: 40
                                     },
-                                    longitude:{
-                                        id: 10001,
+                                    longitude: {
+                                        id: 1001,
                                         label: 'longitude',
                                         value: 40
                                     }
 
                                 }
                             }
-
                         }
                     },
                     {
                         id:11,
                         label:1,
-                        value:{
-                            id:110,
-                            label:'marker',
-                            value:{
-                                id: 1100,
+                        children:{
+                            coords: {
+                                id: 110,
                                 label: 'coords',
-                                value: {
+                                children: {
                                     latitude: {
-                                        id: 11000,
+                                        id: 1100,
                                         label: 'latitude',
-                                        value: 35
+                                        value: 40
                                     },
-                                    longitude:{
-                                        id: 11001,
+                                    longitude: {
+                                        id: 1101,
                                         label: 'longitude',
-                                        value: 35
+                                        value: 40
                                     }
 
                                 }
                             }
-
                         }
-                    },                   {
+                    },
+                    {
                         id:12,
                         label:2,
-                        value:{
-                            id:120,
-                            label:'marker',
-                            value:{
-                                id: 1200,
+                        children:{
+                            coords: {
+                                id: 120,
                                 label: 'coords',
-                                value: {
+                                children: {
                                     latitude: {
-                                        id: 12000,
+                                        id: 1200,
                                         label: 'latitude',
-                                        value: 25
+                                        value: 40
                                     },
-                                    longitude:{
-                                        id: 12001,
+                                    longitude: {
+                                        id: 1201,
                                         label: 'longitude',
-                                        value: 25
+                                        value: 40
                                     }
 
                                 }
                             }
+                        }
+                    },
+                    {
+                        id:13,
+                        label:3,
+                        children:{
+                            coords: {
+                                id: 130,
+                                label: 'coords',
+                                children: {
+                                    latitude: {
+                                        id: 1300,
+                                        label: 'latitude',
+                                        value: 40
+                                    },
+                                    longitude: {
+                                        id: 1301,
+                                        label: 'longitude',
+                                        value: 40
+                                    }
 
+                                }
+                            }
                         }
                     }
+
 
 
                 ]
