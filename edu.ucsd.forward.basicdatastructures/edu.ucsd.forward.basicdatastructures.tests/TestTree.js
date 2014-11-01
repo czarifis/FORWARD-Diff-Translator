@@ -242,7 +242,7 @@ function addComplexObjects(){
 
         }
     };
-    tree.addSubtree(null, map ,null);
+    tree.addSubtreeV2(null, map ,null);
     tree.printBFS();
 
 }
