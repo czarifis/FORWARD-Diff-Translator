@@ -122,7 +122,113 @@ function addNodesWithArraysToTree2(){
 
         ]
     };
-
-    tree.addSubtree(null, d);
+    tree.addSubtree(null, d,null);
     tree.printBFS();
 }
+
+
+function addComplexObjects(){
+    var tree = new Tree();
+    var map = {
+        id:1,
+        label:'map',
+        value:{
+            zoom:{
+                id:2,
+                label:'zoom',
+                value :8
+            },
+            markers:{
+                id:3,
+                label:'markers',
+                value:[
+                    {
+                        id:10,
+                        label:0,
+                        value:{
+                            id:100,
+                            label:'marker',
+                            value:{
+                                id: 1000,
+                                label: 'coords',
+                                value: {
+                                    latitude: {
+                                        id: 10000,
+                                        label: 'latitude',
+                                        value: 40
+                                    },
+                                    longitude:{
+                                        id: 10001,
+                                        label: 'longitude',
+                                        value: 40
+                                    }
+
+                                }
+                            }
+
+                        }
+                    },
+                    {
+                        id:11,
+                        label:1,
+                        value:{
+                            id:110,
+                            label:'marker',
+                            value:{
+                                id: 1100,
+                                label: 'coords',
+                                value: {
+                                    latitude: {
+                                        id: 11000,
+                                        label: 'latitude',
+                                        value: 35
+                                    },
+                                    longitude:{
+                                        id: 11001,
+                                        label: 'longitude',
+                                        value: 35
+                                    }
+
+                                }
+                            }
+
+                        }
+                    },                   {
+                        id:12,
+                        label:2,
+                        value:{
+                            id:120,
+                            label:'marker',
+                            value:{
+                                id: 1200,
+                                label: 'coords',
+                                value: {
+                                    latitude: {
+                                        id: 12000,
+                                        label: 'latitude',
+                                        value: 25
+                                    },
+                                    longitude:{
+                                        id: 12001,
+                                        label: 'longitude',
+                                        value: 25
+                                    }
+
+                                }
+                            }
+
+                        }
+                    }
+
+
+                ]
+            }
+
+        }
+    };
+    tree.addSubtree(null, map ,null);
+    tree.printBFS();
+
+}
+
+

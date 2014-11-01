@@ -134,15 +134,20 @@ Tree.prototype.printBFS = function(){
     }
 };
 
+/**
+ * This function takes a JSON file and generates a tree.
+ *
+ *
+ * @param parent should be null the first time you run this
+ * @param jsonSubtree this is the actual JSON file
+ * @param labelIfPrimitive If the current jsonSubtree is a primitive also provide the label.
+ */
+
 Tree.prototype.addSubtree = function(parent, jsonSubtree,labelIfPrimitive){
     console.log('arguments:','parent:',parent,'node:',jsonSubtree);
 
 
     var newTreeNode = new TreeNode();
-
-
-    console.log('what is the input?');
-
     if (typeof jsonSubtree == 'object') {
         // Input is an object
 
@@ -178,7 +183,6 @@ Tree.prototype.addSubtree = function(parent, jsonSubtree,labelIfPrimitive){
                             console.log('child is object');
                             newChild.label = att;
 //                            newChild.id = jsonSubtree[att].id;
-
                         }
                         else{
                             console.log('child is primitive');
@@ -218,8 +222,6 @@ Tree.prototype.addSubtree = function(parent, jsonSubtree,labelIfPrimitive){
 
 
             }
-
-
         }
         else {
 
