@@ -219,8 +219,33 @@ Tree.prototype.generateTree = function(JSON){
 };
 
 
-Tree.prototype.deleteSubtree = function(JSON){{
-    var curr = this.TreeHashTable.getTreeNode(JSON.id);
+/**
+ * Detaches branch starting with node with id:JSON.id from the tree.
+ *
+ * At the moment I don't traverse the whole subtree to delete each node
+ * and I don't clear the corresponding key-values from the hash
+ * @param JSON
+ */
+Tree.prototype.deleteSubtree = function(JSON){
+    // asserting...
+    assertDefined(JSON);
+    assertNonNull(JSON);
+    assertObject(JSON);
+    assert(JSON.hasOwnProperty('id'),'JSON does not have property: id');
+    this.deleteSubtreeWithID(JSON.id);
+
+
+
+
+};
+
+
+/**
+ * This function deletes a node with a specific id
+ * @param id
+ */
+Tree.prototype.deleteSubtreeWithID = function(id){
+    var curr = this.TreeHashTable.getTreeNode(id);
     console.log("about to delete node:",curr);
     if(curr.parent===null){
         // About to delete the root
@@ -228,12 +253,85 @@ Tree.prototype.deleteSubtree = function(JSON){{
 //        this.
 //        delete this.head
     } else {
-        curr.parent.children.delDataWithID(JSON.id)
+        curr.parent.children.delDataWithID(id)
+    }
+};
+
+/**
+ * This function updates the value of a single node given a JSON
+ * @param JSON
+ */
+Tree.prototype.updateNode = function(JSON){
+
+        // asserting...
+        assertDefined(JSON);
+        assertNonNull(JSON);
+        assertObject(JSON);
+        assert(JSON.hasOwnProperty('id'),'JSON does not have property: id');
+        this.updateNodeUsingID(JSON.id,JSON.payload);
+
+
+};
+
+Tree.prototype.updateNodeUsingID =  function(id,payload){
+
+    assertNumber(id);
+    assertDefined(payload);
+    assertNonNull(payload);
+    assertObject(payload);
+
+    var curr = this.TreeHashTable.getTreeNode(id);
+    console.log("about to update node:",curr);
+    curr.value = payload.value;
+    curr.label = payload.label;
+
+};
+
+
+
+
+Tree.prototype.insertNode = function(JSON){
+
+    // asserting...
+    assertDefined(JSON);
+    assertNonNull(JSON);
+    assertObject(JSON);
+    assert(JSON.hasOwnProperty('id'),'JSON does not have property: id');
+    this.insertNodeUsingID(JSON.id,JSON.payload,JSON.listPredecessor);
+
+
+};
+
+Tree.prototype.insertNodeUsingID = function(id, payload, listPredecessor){
+
+    assertNumber(id);
+    assertDefined(payload);
+    assertNonNull(payload);
+    assertObject(payload);
+    var parent = this.TreeHashTable.getTreeNode(id);
+
+    var newChild = new TreeNode();
+    newChild.id = payload.id;
+    newChild.label = payload.label;
+    newChild.parent = parent;
+    newChild.value = payload.value;
+
+    console.log("about to add node:",newChild,'below:',parent,'after node with id:',listPredecessor);
+
+    // children
+    if(parent.children === null){
+        // the parent is a leaf we need to add children to it
+        newChild.isLeaf = true;
+        parent.children = new LinkedList();
+        parent.children.pushData(newChild);
+        parent.isLeaf = false;
+    }
+    else{
+        parent.children.addDataAfterID(listPredecessor,newChild);
+
     }
 
-
-}};
-
+};
 
 
 

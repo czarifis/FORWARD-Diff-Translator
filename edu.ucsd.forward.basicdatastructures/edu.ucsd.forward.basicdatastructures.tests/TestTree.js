@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Created by Costas Zarifis on 10/30/14.
  */
@@ -234,7 +235,7 @@ function addComplexObjects(){
 
 function addComplexObjectsAndDeleteOneOfThem(){
     var t = addComplexObjects();
-    JSON = {
+    var JSON = {
         id:100
     };
     t.deleteSubtree(JSON);
@@ -243,3 +244,67 @@ function addComplexObjectsAndDeleteOneOfThem(){
 }
 
 
+function addComplexObjectsAndUpdateOneOfThem(){
+    var t = addComplexObjects();
+    var JSON = {
+        id:1100,
+        payload:{
+            label : 'new label',
+            value : 'new value'
+        }
+    };
+
+    t.updateNode(JSON);
+    t.printBFS();
+}
+
+
+function addComplexObjectsAndInsertOneMoreUnderaLeaf(){
+    var t = addComplexObjects();
+    var JSON = {
+        id:1100,
+        payload:{
+            id : 21321,
+            label : 'new label',
+            value : 'new value'
+        },
+        listPredecessor: 11000 // It's optional no value required when the id corresponds to a leaf
+    };
+
+    t.insertNode(JSON);
+    t.printBFS();
+}
+
+
+function addComplexObjectsAndInsertOneMoreUnderanInternal(){
+    var t = addComplexObjects();
+    var JSON = {
+        id:1,
+        payload:{
+            id : 21321,
+            label : 'new label',
+            value : 'new value'
+        },
+        listPredecessor: 2 // It's optional no value required when the id corresponds to a leaf
+    };
+
+    t.insertNode(JSON);
+    t.printBFS();
+}
+
+
+function addComplexObjectsAndInsertOneMoreUnderanInternalAtTheBeginningOfTheLinkedList(){
+    var t = addComplexObjects();
+    var JSON = {
+        id:1,
+        payload:{
+            id : 21321,
+            label : 'new label',
+            value : 'new value'
+        }
+//        listPredecessor: 2 // It's optional no value required when the id corresponds to a leaf
+    };
+
+    t.insertNode(JSON);
+    t.printBFS();
+}

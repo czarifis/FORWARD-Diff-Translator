@@ -89,6 +89,36 @@ LinkedList.prototype.getSize = function(){
     return this.size;
 };
 
+// Pushes a node with the given data at the end of this linked list
+LinkedList.prototype.pushDataToTheFront = function(data){
+    // asserting...
+    assertDefined(data);
+    assertNonNull(data);
+    assertObject(data);
+    assert(data.hasOwnProperty('id'),'data does not have property: id');
+
+
+    // check performed... Let's create a node and push it to the linked list
+
+    var newNode = new LinkedListNode();
+    newNode.data = data;
+    newNode.id = data.id;
+    newNode.next = null;
+    newNode.previous = null;
+    this.size++;
+    if(this.head===null){
+        this.head = newNode;
+        this.tail = newNode;
+    }
+    else{
+        this.head.previous = newNode;
+        newNode.next = this.head;
+        this.head = newNode;
+    }
+    if(newNode.data.id!==null) // check if primitive
+        this.llHashTable.add(newNode);
+};
+
 
 // Pushes a node with the given data at the end of this linked list
 LinkedList.prototype.pushData = function(data){
@@ -177,42 +207,47 @@ LinkedList.prototype.addDataAfterID = function(prevID, data){
     assertDefined(data);
     assertNonNull(data);
     assertObject(data);
-    assertDefined(prevID);
-    assertNonNull(prevID);
-    assertNumber(prevID);
+
     assert(data.hasOwnProperty('id'),'data does not have property: id');
 
-    // check performed... Let's add data after node with id: prevID
-    var newNode = new LinkedListNode();
-    newNode.data = data;
-    newNode.id = data.id;
+    if((prevID!==null)&&(prevID!==undefined)) {
 
-    // Linked List is empty so there is no such ID
-    if(this.head===null) {
-        throw 'Linked list is empty so given ID could not be found';
+        // check performed... Let's add data after node with id: prevID
+        var newNode = new LinkedListNode();
+        newNode.data = data;
+        newNode.id = data.id;
+
+        // Linked List is empty so there is no such ID
+        if(this.head===null) {
+            throw 'Linked list is empty so given ID could not be found';
+        }
+
+
+        var prevNode = this.searchForID(prevID);
+
+        // Checking if there is no node with the given ID
+        if (prevNode === null) {
+            throw 'Given ID was not found';
+        }
+
+        newNode.previous = prevNode;
+
+        // If this is the last element update the Linked list's tail.
+        if (prevNode.next !== null)
+            prevNode.next.previous = newNode;
+        else
+            this.tail = newNode;
+        newNode.next = prevNode.next;
+        prevNode.next = newNode;
+
+        this.size++;
+
+        this.llHashTable.add(newNode);
+    } else{
+        this.pushDataToTheFront(data);
     }
 
-    var prevNode = this.searchForID(prevID);
 
-    // Checking if there is no node with the given ID
-    if(prevNode===null){
-        throw 'Given ID was not found';
-    }
-
-    newNode.previous = prevNode;
-
-    // If this is the last element update the Linked list's tail.
-    if(prevNode.next!==null)
-        prevNode.next.previous = newNode;
-    else
-        this.tail=newNode;
-    newNode.next = prevNode.next;
-    prevNode.next = newNode;
-
-
-    this.size++;
-
-    this.llHashTable.add(newNode);
 
 };
 
