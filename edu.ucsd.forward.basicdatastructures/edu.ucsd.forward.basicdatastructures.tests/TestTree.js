@@ -228,7 +228,18 @@ function addComplexObjects(){
     };
     tree.generateTree(map);
     tree.printBFS();
+    return tree;
 
+}
+
+function addComplexObjectsAndDeleteOneOfThem(){
+    var t = addComplexObjects();
+    JSON = {
+        id:100
+    };
+    t.deleteSubtree(JSON);
+
+    t.printBFS();
 }
 
 

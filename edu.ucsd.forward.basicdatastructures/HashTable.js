@@ -116,6 +116,8 @@ function TreeHashTable(){
     HashTable.call(this);
 }
 
+TreeHashTable.prototype = new HashTable();
+
 TreeHashTable.prototype.getTreeNode = function(id){
     assertNumber(id);
 

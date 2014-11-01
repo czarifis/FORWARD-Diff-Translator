@@ -73,7 +73,7 @@ function Tree(){
     this.root = null;
 
     // The height of the tree
-    this.height = null;
+//    this.height = 0;
 
     this.TreeHashTable = new TreeHashTable();
 }
@@ -87,33 +87,39 @@ function Tree(){
  */
 Tree.prototype.printBFS = function(){
 
+    console.log('tree:',this);
 
-    console.log('### BFS Printing ###');
-    var stack = [];
-    var depth = [];
-    stack.push(this.root);
-    depth.push(0);
-    while(stack.length!=0) {
-        var len = stack.length;
-        for (var i = 0; i < len; i++) {
-            var temp = stack.shift();
-            var depthVar = depth.shift();
-            var tab = '';
-            for(var j=0;j<depthVar;j++)
-                tab = tab+'\t';
 
-            if(depthVar!==0)
-                console.log(tab+'Node:',temp,'depth:',depthVar);
-            else
-                console.log('\nNode:',temp,'depth:',depthVar);
+    if(this.root!==null) {
 
-            if (temp.children === null) {
-                break;
-            }
-            for (var j=0; j < temp.children.size; j++) {
-                depth.push((depthVar+1));
-                var child = temp.children.get(j).data;
-                stack.push(child);
+        console.log('### BFS Printing ###');
+
+        var stack = [];
+        var depth = [];
+        stack.push(this.root);
+        depth.push(0);
+        while (stack.length != 0) {
+            var len = stack.length;
+            for (var i = 0; i < len; i++) {
+                var temp = stack.shift();
+                var depthVar = depth.shift();
+                var tab = '';
+                for (var j = 0; j < depthVar; j++)
+                    tab = tab + '\t';
+
+                if (depthVar !== 0)
+                    console.log(tab + 'Node:', temp, 'depth:', depthVar);
+                else
+                    console.log('\nNode:', temp, 'depth:', depthVar);
+
+                if (temp.children === null) {
+                    break;
+                }
+                for (var j = 0; j < temp.children.size; j++) {
+                    depth.push((depthVar + 1));
+                    var child = temp.children.get(j).data;
+                    stack.push(child);
+                }
             }
         }
     }
@@ -130,12 +136,12 @@ Tree.prototype.printBFS = function(){
 
 
 Tree.prototype.addSubtreeV2 = function(parent, jsonSubtree,labelIfPrimitive){
-    console.log('arguments:','parent:',parent,'node:',jsonSubtree);
+//    console.log('arguments:','parent:',parent,'node:',jsonSubtree);
 
     if (typeof jsonSubtree == 'object') {
         // Input is an object
 
-        console.log('input is an object');
+//        console.log('input is an object');
         // the root of the jsonSubtree holds an element...
         if (jsonSubtree.length === undefined) {
 
@@ -168,8 +174,10 @@ Tree.prototype.addSubtreeV2 = function(parent, jsonSubtree,labelIfPrimitive){
                             newChild.isLeaf = true;
                             newChild.value = jsonSubtree.children[att].value;
                             newChild.id = jsonSubtree.children[att].id;
+                            this.TreeHashTable.add(newChild);
                             newTreeNode.children.pushData(newChild);
                             newChild.parent = newTreeNode;
+
                         }
                     }
                 }
@@ -178,11 +186,13 @@ Tree.prototype.addSubtreeV2 = function(parent, jsonSubtree,labelIfPrimitive){
                     if (parent === null) {
                         // parent is null so the current node is the head
                         this.root = newTreeNode;
+                        this.TreeHashTable.add(newTreeNode);
                     } else {
                         // TODO: Modify this part appropriately...
                         //                if(parent.children===null) // The current node is the first child of the parent
                         //                    parent.children = new LinkedList();
                         newTreeNode.parent = parent;
+                        this.TreeHashTable.add(newTreeNode);
                         parent.children.pushData(newTreeNode);
                     }
                 }
@@ -207,6 +217,22 @@ Tree.prototype.addSubtreeV2 = function(parent, jsonSubtree,labelIfPrimitive){
 Tree.prototype.generateTree = function(JSON){
     this.addSubtreeV2(null,JSON,null)
 };
+
+
+Tree.prototype.deleteSubtree = function(JSON){{
+    var curr = this.TreeHashTable.getTreeNode(JSON.id);
+    console.log("about to delete node:",curr);
+    if(curr.parent===null){
+        // About to delete the root
+        this.root = null;
+//        this.
+//        delete this.head
+    } else {
+        curr.parent.children.delDataWithID(JSON.id)
+    }
+
+
+}};
 
 
 
