@@ -8,7 +8,9 @@ var guid = function() {
 
 };
 
-
+/**
+ * Function called to generate a tree with arrays
+ */
 function addComplexObjectsWithArrays(){
     var tree = new Tree();
     var map = {
@@ -108,10 +110,13 @@ function addComplexObjectsWithArrays(){
     };
     tree.generateTree(map);
     tree.printBFS();
+    tree.printHashTable();
 
 }
 
-
+/**
+ * Function called to generate a tree with tuples
+ */
 function addComplexObjects(){
     var tree = new Tree();
     var map = {
@@ -229,82 +234,143 @@ function addComplexObjects(){
     };
     tree.generateTree(map);
     tree.printBFS();
+    tree.printHashTable();
     return tree;
 
 }
 
+/**
+ * Function called from the view to generate a tree and delete a node
+ */
 function addComplexObjectsAndDeleteOneOfThem(){
     var t = addComplexObjects();
-    var JSON = {
-        id:100
-    };
-    t.deleteSubtree(JSON);
+
+    // create diff
+    var diff = new Diff();
+    diff.id = 100;
+    diff.op = 'delete';
+
+    console.log(diff);
+    t.applyDiff(diff);
 
     t.printBFS();
+    t.printHashTable();
 }
 
-
+/**
+ * Function called from the view to generate a tree and update a node
+ */
 function addComplexObjectsAndUpdateOneOfThem(){
     var t = addComplexObjects();
-    var JSON = {
-        id:1100,
-        payload:{
-            label : 'new label',
-            value : 'new value'
-        }
+
+    // create diff
+    var diff = new Diff();
+    diff.id = 1100;
+    diff.op = 'update';
+    diff.payload = {
+        value : 'new value'
     };
 
-    t.updateNode(JSON);
+    console.log(diff);
+    t.applyDiff(diff);
+
     t.printBFS();
+    t.printHashTable();
 }
 
-
+/**
+ * Function called from the view to generate a tree and then insert a leaf
+ */
 function addComplexObjectsAndInsertOneMoreUnderaLeaf(){
     var t = addComplexObjects();
-    var JSON = {
-        id:1100,
-        payload:{
-            id : 21321,
-            label : 'new label',
-            value : 'new value'
-        },
-        listPredecessor: 11000 // It's optional no value required when the id corresponds to a leaf
-    };
 
-    t.insertNode(JSON);
+
+    var diff = new Diff();
+    diff.id = 1100;
+    diff.op = 'insert';
+    diff.payload = {
+        id : 21321,
+        label : 'new label',
+        value : 'new value'
+    };
+    diff.list_predecessor = 11000;
+
+    t.applyDiff(diff);
     t.printBFS();
+    t.printHashTable();
 }
 
-
+/**
+ * Function called from the view to generate a tree and then insert an internal node
+ */
 function addComplexObjectsAndInsertOneMoreUnderanInternal(){
     var t = addComplexObjects();
-    var JSON = {
-        id:1,
-        payload:{
-            id : 21321,
-            label : 'new label',
-            value : 'new value'
-        },
-        listPredecessor: 2 // It's optional no value required when the id corresponds to a leaf
+    var diff = new Diff();
+    diff.id = 1;
+    diff.list_predecessor = 2;
+    diff.op = 'insert';
+    diff.payload = {
+        id : 21321,
+        label : 'new label',
+        value : 'new value'
     };
 
-    t.insertNode(JSON);
+    console.log(diff);
+    t.applyDiff(diff);
     t.printBFS();
+    t.printHashTable();
+
 }
 
 
 function addComplexObjectsAndInsertOneMoreUnderanInternalAtTheBeginningOfTheLinkedList(){
     var t = addComplexObjects();
-    var JSON = {
-        id:1,
-        payload:{
-            id : 21321,
-            label : 'new label',
-            value : 'new value'
-        }
-//        listPredecessor: 2 // It's optional no value required when the id corresponds to a leaf
+
+
+
+
+//    console.log(diff);
+//    t.applyDiff(diff);
+//    var JSON = {
+//        id:1,
+//        payload:{
+//            id : 21321,
+//            label : 'new label',
+//            value : 'new value'
+//        }
+////        listPredecessor: 2 // It's optional no value required when the id corresponds to a leaf
+//    };
+
+    var diff = new Diff();
+    diff.id = 1;
+    diff.list_predecessor = undefined;
+    diff.op = 'insert';
+    diff.payload = {
+        id : 21321,
+        label : 'new label',
+        value : 'new value'
     };
 
-    t.insertNode(JSON);
+    console.log(diff);
+    t.applyDiff(diff);
     t.printBFS();
+    t.printHashTable();
+
+
 }
+
+// TODO: on update no label has to be given... Crush if it's given - Fixed
+// TODO: Clean the hashtables
+// TODO: create classes for insert diff, update diff etc...
+// TODO: Need another array that stores all entering diffs
+
+// TODO: About markers example
+// 500 trucks and we move 10% of them - Measure time
+// For the time:
+// * Use stop watch
+// * chrome developer tools find if there's a stopwatch for the rendering...
+
+
+
+
+

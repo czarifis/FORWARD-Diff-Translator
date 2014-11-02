@@ -88,8 +88,6 @@ function Tree(){
 Tree.prototype.printBFS = function(){
 
     console.log('tree:',this);
-
-
     if(this.root!==null) {
 
         console.log('### BFS Printing ###');
@@ -123,6 +121,93 @@ Tree.prototype.printBFS = function(){
             }
         }
     }
+};
+
+
+
+/*
+ * This is an implementation of the BFS algorithm
+ * so that we would be able to print per level thus
+ * easier visualizing the tree. The tree traversal
+ * will begin from the given TreeNode
+ */
+Tree.prototype.printBFSstartingFromNode = function(branch){
+
+    console.log('tree:',this);
+    if(this.root!==null) {
+
+        console.log('### BFS Printing starting from:',branch,' ###');
+
+        var stack = [];
+        var depth = [];
+        stack.push(branch);
+        depth.push(0);
+        while (stack.length != 0) {
+            var len = stack.length;
+            for (var i = 0; i < len; i++) {
+                var temp = stack.shift();
+                var depthVar = depth.shift();
+                var tab = '';
+                for (var j = 0; j < depthVar; j++)
+                    tab = tab + '\t';
+
+                if (depthVar !== 0)
+                    console.log(tab + 'Node:', temp, 'depth:', depthVar);
+                else
+                    console.log('\nNode:', temp, 'depth:', depthVar);
+
+                if (temp.children === null) {
+                    break;
+                }
+                for (var j = 0; j < temp.children.size; j++) {
+                    depth.push((depthVar + 1));
+                    var child = temp.children.get(j).data;
+                    stack.push(child);
+                }
+            }
+        }
+    }
+};
+
+
+/**
+ * Given a node traverse the entire subtree and delete the
+ * appropriate nodes from the hash table
+ */
+Tree.prototype.BFSHashDeallocation = function(branch){
+
+    if(this.root!==null) {
+
+        console.log('### BFS Printing starting from:',branch,' ###');
+
+        var stack = [];
+        stack.push(branch);
+        while (stack.length != 0) {
+            var len = stack.length;
+            for (var i = 0; i < len; i++) {
+                var temp = stack.shift();
+                console.log('About to delete:',temp);
+                this.TreeHashTable.remove(temp.id);
+                var tab = '';
+
+                if (temp.children === null) {
+                    break;
+                }
+                for (var j = 0; j < temp.children.size; j++) {
+                    var child = temp.children.get(j).data;
+                    stack.push(child);
+                }
+            }
+        }
+    }
+};
+
+/**
+ * This function prints the hash table stored in the tree.
+ */
+Tree.prototype.printHashTable = function(){
+
+    console.log('Tree Hash Table:', this.TreeHashTable);
 };
 
 
@@ -220,6 +305,8 @@ Tree.prototype.generateTree = function(JSON){
 
 
 /**
+ * DEPRECATED!
+ *
  * Detaches branch starting with node with id:JSON.id from the tree.
  *
  * At the moment I don't traverse the whole subtree to delete each node
@@ -247,6 +334,7 @@ Tree.prototype.deleteSubtree = function(JSON){
 Tree.prototype.deleteSubtreeWithID = function(id){
     var curr = this.TreeHashTable.getTreeNode(id);
     console.log("about to delete node:",curr);
+    this.BFSHashDeallocation(curr);
     if(curr.parent===null){
         // About to delete the root
         this.root = null;
@@ -258,6 +346,7 @@ Tree.prototype.deleteSubtreeWithID = function(id){
 };
 
 /**
+ * DEPRECATED!
  * This function updates the value of a single node given a JSON
  * @param JSON
  */
@@ -283,11 +372,15 @@ Tree.prototype.updateNodeUsingID =  function(id,payload){
     var curr = this.TreeHashTable.getTreeNode(id);
     console.log("about to update node:",curr);
     curr.value = payload.value;
-    curr.label = payload.label;
 
 };
 
 
+/**
+ * DEPRECATED!
+ * Given a JSON file insert a node
+ * @param JSON
+ */
 
 
 Tree.prototype.insertNode = function(JSON){
@@ -333,6 +426,51 @@ Tree.prototype.insertNodeUsingID = function(id, payload, listPredecessor){
 
 };
 
+/**
+ * This function applies the diff to the already created tree structure.
+ * It identifies the diff using the op, performs some checks and calls
+ * the corresponding function that applies the diff.
+ *
+ * @param diff
+ */
+Tree.prototype.applyDiff = function(diff){
+    assertNumber(diff.id);
+    assertDefined(diff.id);
+    assertNonNull(diff.id);
+
+
+    // identify the op of the diff perform the appropriate checks
+    // and call the corresponding function.
+    console.log(diff.op);
+    switch (diff.op) {
+        case 'insert':
+            assertDefined(diff.payload);
+            assertNonNull(diff.payload);
+            assertDefined(diff.list_predecessor);
+
+            this.insertNodeUsingID(diff.id,diff.payload,diff.list_predecessor);
+            break;
+        case 'update':
+            assertDefined(diff.payload);
+            assertNonNull(diff.payload);
+            assert(diff.list_predecessor===null,'listPredecessor is not permitted on update diffs');
+            assert(diff.payload.label===undefined, 'label is not permitted on updates');
+            this.updateNodeUsingID(diff.id,diff.payload);
+            break;
+        case 'delete':
+            assert(diff.payload===null,'Payload is not permitted on deletes');
+            assert(diff.list_predecessor===null,'listPredecessor is not permitted on delete diffs');
+            this.deleteSubtreeWithID(diff.id);
+
+
+            break;
+        default :
+            assert(false,'diff op not identified');
+            break;
+    }
+
+
+};
 
 
 
