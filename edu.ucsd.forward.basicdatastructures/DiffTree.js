@@ -253,7 +253,7 @@ Tree.prototype.addSubtreeV2 = function(parent, jsonSubtree,labelIfPrimitive,list
                     if (jsonSubtree.children.hasOwnProperty(att)) {
 
                         if (jsonSubtree.children[att].hasOwnProperty('children')) {
-                            this.addSubtreeV2(newTreeNode, jsonSubtree.children[att],att,jsonSubtree.children[att].id);
+                            this.addSubtreeV2(newTreeNode, jsonSubtree.children[att],att,null);
                         }else{
                             var newChild = new TreeNode();
                             newChild.label = att;

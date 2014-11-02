@@ -26,7 +26,7 @@
       <file leaf-file-name="LinkedList.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/LinkedList.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.089286" vertical-offset="3295" max-vertical-offset="6660">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3295" max-vertical-offset="6660">
               <caret line="202" column="21" selection-start-line="202" selection-start-column="21" selection-end-line="202" selection-end-column="21" />
               <folding />
             </state>
@@ -46,8 +46,8 @@
       <file leaf-file-name="DiffTree.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/DiffTree.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33268294" vertical-offset="5131" max-vertical-offset="8748">
-              <caret line="304" column="41" selection-start-line="304" selection-start-column="41" selection-end-line="304" selection-end-column="41" />
+            <state vertical-scroll-proportion="-1.8307123" vertical-offset="7667" max-vertical-offset="8748">
+              <caret line="316" column="3" selection-start-line="316" selection-start-column="3" selection-end-line="316" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -56,11 +56,9 @@
       <file leaf-file-name="Diff.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/Diff.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="522">
+            <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="522">
               <caret line="21" column="25" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="25" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -78,7 +76,7 @@
       <file leaf-file-name="LinkedList.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/LinkedList.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-21.333334" vertical-offset="0" max-vertical-offset="684">
+            <state vertical-scroll-proportion="0.0" vertical-offset="576" max-vertical-offset="684">
               <caret line="32" column="7" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
               <folding />
             </state>
@@ -88,7 +86,7 @@
       <file leaf-file-name="TestTree.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/edu.ucsd.forward.basicdatastructures.tests/TestTree.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.892857" vertical-offset="2212" max-vertical-offset="6876">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2212" max-vertical-offset="6876">
               <caret line="135" column="31" selection-start-line="135" selection-start-column="31" selection-end-line="135" selection-end-column="31" />
               <folding />
             </state>
@@ -98,7 +96,7 @@
       <file leaf-file-name="TreeTest.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TreeTest.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.333333" vertical-offset="0" max-vertical-offset="774">
+            <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="774">
               <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
               <folding />
             </state>
@@ -218,6 +216,14 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -228,12 +234,14 @@
       <option name="showConsoleOnStdOut" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
+    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" />
+      <option name="executablePath" />
       <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -241,16 +249,6 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
-      <option name="cucumberJsArguments" />
-      <option name="executablePath" />
-      <option name="filePath" />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -319,6 +317,70 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/LinkedList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6660">
+          <caret line="202" column="21" selection-start-line="202" selection-start-column="21" selection-end-line="202" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/HashTable.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1583" max-vertical-offset="2664">
+          <caret line="133" column="30" selection-start-line="133" selection-start-column="24" selection-end-line="133" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/DiffTree.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5131" max-vertical-offset="8748">
+          <caret line="304" column="41" selection-start-line="304" selection-start-column="41" selection-end-line="304" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/Diff.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="522">
+          <caret line="21" column="25" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/edu.ucsd.forward.basicdatastructures.tests/TestLinkedList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="3636">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="9" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LinkedList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="576" max-vertical-offset="684">
+          <caret line="32" column="7" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/edu.ucsd.forward.basicdatastructures.tests/TestTree.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2212" max-vertical-offset="6876">
+          <caret line="135" column="31" selection-start-line="135" selection-start-column="31" selection-end-line="135" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TreeTest.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="774">
+          <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/LinkedList.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8352">
@@ -481,7 +543,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/LinkedList.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.333334" vertical-offset="0" max-vertical-offset="684">
+        <state vertical-scroll-proportion="0.0" vertical-offset="576" max-vertical-offset="684">
           <caret line="32" column="7" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
           <folding />
         </state>
@@ -489,7 +551,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TreeTest.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.333333" vertical-offset="0" max-vertical-offset="774">
+        <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="774">
           <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
           <folding />
         </state>
@@ -507,15 +569,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="522">
           <caret line="21" column="25" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="25" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/LinkedList.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.089286" vertical-offset="3295" max-vertical-offset="6660">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3295" max-vertical-offset="6660">
           <caret line="202" column="21" selection-start-line="202" selection-start-column="21" selection-end-line="202" selection-end-column="21" />
           <folding />
         </state>
@@ -523,7 +583,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/edu.ucsd.forward.basicdatastructures.tests/TestTree.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.892857" vertical-offset="2212" max-vertical-offset="6876">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2212" max-vertical-offset="6876">
           <caret line="135" column="31" selection-start-line="135" selection-start-column="31" selection-end-line="135" selection-end-column="31" />
           <folding />
         </state>
@@ -531,8 +591,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/DiffTree.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33268294" vertical-offset="5131" max-vertical-offset="8748">
-          <caret line="304" column="41" selection-start-line="304" selection-start-column="41" selection-end-line="304" selection-end-column="41" />
+        <state vertical-scroll-proportion="-1.8307123" vertical-offset="7667" max-vertical-offset="8748">
+          <caret line="316" column="3" selection-start-line="316" selection-start-column="3" selection-end-line="316" selection-end-column="3" />
           <folding />
         </state>
       </provider>
