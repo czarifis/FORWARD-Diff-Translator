@@ -43,11 +43,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DiffTree.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="DiffTree.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/DiffTree.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.054143645" vertical-offset="6989" max-vertical-offset="10206">
-              <caret line="391" column="41" selection-start-line="391" selection-start-column="41" selection-end-line="391" selection-end-column="41" />
+            <state vertical-scroll-proportion="-13.410714" vertical-offset="7079" max-vertical-offset="10188">
+              <caret line="435" column="0" selection-start-line="435" selection-start-column="0" selection-end-line="435" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -83,10 +83,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestTree.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="TestTree.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/edu.ucsd.forward.basicdatastructures.tests/TestTree.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.9464285" vertical-offset="4603" max-vertical-offset="8118">
+            <state vertical-scroll-proportion="0.24419889" vertical-offset="4603" max-vertical-offset="8118">
               <caret line="268" column="16" selection-start-line="268" selection-start-column="16" selection-end-line="268" selection-end-column="16" />
               <folding />
             </state>
@@ -123,9 +123,9 @@
         <option value="$PROJECT_DIR$/TreeTest.html" />
         <option value="$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/HashTable.js" />
         <option value="$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/Diff.js" />
-        <option value="$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/edu.ucsd.forward.basicdatastructures.tests/TestTree.js" />
         <option value="$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/LinkedList.js" />
         <option value="$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/DiffTree.js" />
+        <option value="$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/edu.ucsd.forward.basicdatastructures.tests/TestTree.js" />
       </list>
     </option>
   </component>
@@ -587,14 +587,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/edu.ucsd.forward.basicdatastructures.tests/TestTree.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.9464285" vertical-offset="4603" max-vertical-offset="8118">
-          <caret line="268" column="16" selection-start-line="268" selection-start-column="16" selection-end-line="268" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/LinkedList.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.089286" vertical-offset="5593" max-vertical-offset="7002">
@@ -613,8 +605,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/DiffTree.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.054143645" vertical-offset="6989" max-vertical-offset="10206">
-          <caret line="391" column="41" selection-start-line="391" selection-start-column="41" selection-end-line="391" selection-end-column="41" />
+        <state vertical-scroll-proportion="-13.410714" vertical-offset="7079" max-vertical-offset="10188">
+          <caret line="435" column="0" selection-start-line="435" selection-start-column="0" selection-end-line="435" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/edu.ucsd.forward.basicdatastructures/edu.ucsd.forward.basicdatastructures.tests/TestTree.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24419889" vertical-offset="4603" max-vertical-offset="8118">
+          <caret line="268" column="16" selection-start-line="268" selection-start-column="16" selection-end-line="268" selection-end-column="16" />
           <folding />
         </state>
       </provider>

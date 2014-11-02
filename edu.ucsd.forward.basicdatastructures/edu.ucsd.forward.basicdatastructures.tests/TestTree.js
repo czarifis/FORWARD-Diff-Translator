@@ -266,7 +266,7 @@ function addComplexObjectsAndUpdateOneOfThem(){
 
     // create diff
     var diff = new Diff();
-    diff.id = 12;
+    diff.id = 10;
     diff.op = 'update';
     diff.payload = {
         newMarker: {

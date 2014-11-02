@@ -400,41 +400,40 @@ Tree.prototype.updateNodeUsingAnnotation =  function(annotation){
 
             // children
             if (curr.children === null) {
-                // the parent is a leaf we need to add children to it
-                curr.isLeaf = true;
+                // the curr node is a leaf we don't need to delete the nodes one by one.
             }
             else {
                 // Get all the children of the previous node and delete them
                 // from the tree hash table
                 var allElems = curr.children.getAllElements();
-                for (var jj=0;jj<allElems.length;jj++){
-                        this.BFSHashDeallocation(allElems[jj].data);
+                for (var jj = 0; jj < allElems.length; jj++) {
+                    this.BFSHashDeallocation(allElems[jj].data);
                 }
                 curr.children = null;
+            }
 
-                var pred = null;
-                for (var att2 in payload[att].children) {
-                    if (payload[att].children.hasOwnProperty(att2)) {
-                        // Create a new tree node for each child
+            var pred = null;
+            for (var att2 in payload[att].children) {
+                if (payload[att].children.hasOwnProperty(att2)) {
+                    // Create a new tree node for each child
 
-                        var currChild = payload[att].children[att2];
+                    var currChild = payload[att].children[att2];
 
 
 //                        var newTreeNode = new TreeNode();
-                        if (currChild.children !== null) {
-                            curr.children = new LinkedList();
-                        }
-
-                        this.TreeHashTable.add(curr);
-                        this.addSubtreeV2(curr, currChild, null, pred);
-                        pred = currChild.id;
-
+                    if (currChild.children !== null) {
+                        curr.children = new LinkedList();
                     }
+
+                    this.TreeHashTable.add(curr);
+                    this.addSubtreeV2(curr, currChild, null, pred);
+                    pred = currChild.id;
+
                 }
-//                parent.children.addDataAfterID(listPredecessor, newChild);
-
-
             }
+
+
+
         }
     }
 
