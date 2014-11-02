@@ -111,6 +111,7 @@ function addComplexObjectsWithArrays(){
     tree.generateTree(map);
     tree.printBFS();
     tree.printHashTable();
+    return tree;
 
 }
 
@@ -304,15 +305,35 @@ function addComplexObjectsAndInsertOneMoreUnderaLeaf(){
  * Function called from the view to generate a tree and then insert an internal node
  */
 function addComplexObjectsAndInsertOneMoreUnderanInternal(){
-    var t = addComplexObjects();
+    var t = addComplexObjectsWithArrays();
     var diff = new Diff();
-    diff.id = 1;
-    diff.list_predecessor = 2;
+    diff.id = 3;
+    diff.list_predecessor = 12;
     diff.op = 'insert';
     diff.payload = {
-        id : 21321,
-        label : 'new label',
-        value : 'new value'
+        newMarker: {
+            id: 321,
+            label: 'newMarker',
+            children: {
+                coords: {
+                    id: 3210,
+                    label: 'coords',
+                    children: {
+                        latitude: {
+                            id: 32100,
+                            label: 'latitude',
+                            value: 40
+                        },
+                        longitude: {
+                            id: 32101,
+                            label: 'longitude',
+                            value: 40
+                        }
+
+                    }
+                }
+            }
+        }
     };
 
     console.log(diff);

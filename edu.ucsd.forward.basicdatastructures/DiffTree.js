@@ -63,7 +63,7 @@ function TreeNode() {
     this.isLeaf = false;
 
     // available annotations
-    this.annotations = [];
+    this.annotations = new AnnoHashTable();
 
 }
 
@@ -220,7 +220,7 @@ Tree.prototype.printHashTable = function(){
  */
 
 
-Tree.prototype.addSubtreeV2 = function(parent, jsonSubtree,labelIfPrimitive,list_predecessor){
+Tree.prototype.addSubtreeV2 = function(parent, jsonSubtree,labelIfPrimitive,predecessor){
 //    console.log('arguments:','parent:',parent,'node:',jsonSubtree);
 
     if (typeof jsonSubtree == 'object') {
@@ -280,7 +280,7 @@ Tree.prototype.addSubtreeV2 = function(parent, jsonSubtree,labelIfPrimitive,list
                         //                    parent.children = new LinkedList();
                         newTreeNode.parent = parent;
                         this.TreeHashTable.add(newTreeNode);
-                        parent.children.addDataAfterID(list_predecessor,newTreeNode);
+                        parent.children.addDataAfterID(predecessor,newTreeNode);
                     }
                 }
             }
@@ -397,33 +397,73 @@ Tree.prototype.insertNode = function(JSON){
 
 };
 
-Tree.prototype.insertNodeUsingID = function(id, payload, listPredecessor){
+
+
+//
+//// The ID of a node
+//this.id = null;
+//
+//// the name of the node/edge
+//this.label = null;
+//
+//// the value of the node if it's a leaf
+//this.value = null;
+//
+//// The parent of the current node
+//this.parent = null;
+//
+//// children
+//this.children = null;
+//
+//// is leaf?
+//this.isLeaf = false;
+//
+//// available annotations
+//this.annotations = [];
+
+
+Tree.prototype.insertNodeUsingID = function(annotation){
+
+
+    var id = annotation.id;
+    var payload = annotation.payload;
+    var listPredecessor = annotation.list_predecessor;
+
+    var op = annotation.op;
 
     assertNumber(id);
     assertDefined(payload);
     assertNonNull(payload);
     assertObject(payload);
     var parent = this.TreeHashTable.getTreeNode(id);
+    for (var att in payload) {
+        if(payload.hasOwnProperty(att)){
+            var newChild = new TreeNode();
+            newChild.id = payload[att].id;
+            newChild.label = payload[att].label;
+            newChild.parent = parent;
+            newChild.value = payload[att].value;
+            newChild.children = payload[att].children;
+            newChild.annotations.add(annotation);
 
-    var newChild = new TreeNode();
-    newChild.id = payload.id;
-    newChild.label = payload.label;
-    newChild.parent = parent;
-    newChild.value = payload.value;
+            console.log("about to add node:", newChild, 'below:', parent, 'after node with id:', listPredecessor);
 
-    console.log("about to add node:",newChild,'below:',parent,'after node with id:',listPredecessor);
+            // children
+            if (parent.children === null) {
+                // the parent is a leaf we need to add children to it
+                newChild.isLeaf = true;
+                parent.children = new LinkedList();
+                //        parent.children.pushData(newChild);
+                parent.isLeaf = false;
 
-    // children
-    if(parent.children === null){
-        // the parent is a leaf we need to add children to it
-        newChild.isLeaf = true;
-        parent.children = new LinkedList();
-        parent.children.pushData(newChild);
-        parent.isLeaf = false;
-    }
-    else{
-        parent.children.addDataAfterID(listPredecessor,newChild);
+                this.addSubtreeV2(parent, newChild, null, listPredecessor);
+            }
+            else {
+//                parent.children.addDataAfterID(listPredecessor, newChild);
+                this.addSubtreeV2(parent, newChild, null, listPredecessor);
 
+            }
+        }
     }
 
 };
@@ -450,7 +490,7 @@ Tree.prototype.applyDiff = function(diff){
             assertNonNull(diff.payload);
             assertDefined(diff.list_predecessor);
 
-            this.insertNodeUsingID(diff.id,diff.payload,diff.list_predecessor);
+            this.insertNodeUsingID(diff);
             break;
         case 'update':
             assertDefined(diff.payload);

@@ -54,7 +54,6 @@ HashTable.prototype.getVal = function(key) {
 HashTable.prototype.addVal = function(key, value) {
     assertNonNull(key);
     assertDefined(key);
-    assertNumber(key);
     assertNonNull(value);
     assertDefined(value);
     this.m_table[key] = value;
@@ -137,6 +136,48 @@ TreeHashTable.prototype.remove = function(id){
     assertNumber(id);
     this.removeKey(id);
 };
+
+
+/*
+ * Annotations Hash Table Class
+ *
+ */
+
+function AnnoHashTable(){
+    HashTable.call(this);
+}
+
+AnnoHashTable.prototype = new HashTable();
+
+AnnoHashTable.prototype.getAnnotation = function(annotationName){
+    assertDefined(annotationName);
+    assertNonNull(annotationName);
+
+    return this.getVal(annotationName);
+};
+
+AnnoHashTable.prototype.add = function(annotation){
+    assertObject(annotation);
+    assertDefined(annotation);
+    assertNonNull(annotation);
+    assertDefined(annotation.op);
+    assertNonNull(annotation.op);
+
+    this.addVal(annotation.op, annotation);
+};
+
+AnnoHashTable.prototype.remove = function(id){
+    assertObject(annotation);
+    assertDefined(annotation);
+    assertNonNull(annotation);
+    assertDefined(annotation.op);
+    assertNonNull(annotation.op);
+
+    this.removeKey(annotation.op);
+};
+
+
+
 
 
 
