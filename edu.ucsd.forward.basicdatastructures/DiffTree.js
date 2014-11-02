@@ -178,7 +178,7 @@ Tree.prototype.BFSHashDeallocation = function(branch){
 
     if(this.root!==null) {
 
-        console.log('### BFS Printing starting from:',branch,' ###');
+        console.log('### BFS deletion starting from:',branch,' ###');
 
         var stack = [];
         stack.push(branch);
@@ -333,17 +333,21 @@ Tree.prototype.deleteSubtree = function(JSON){
  * This function deletes a node with a specific id
  * @param id
  */
-Tree.prototype.deleteSubtreeWithID = function(id){
+Tree.prototype.deleteSubtreeWithID = function(annotation){
+    var id = annotation.id;
     var curr = this.TreeHashTable.getTreeNode(id);
+    curr.annotations.add(annotation);
     console.log("about to delete node:",curr);
     this.BFSHashDeallocation(curr);
     if(curr.parent===null){
         // About to delete the root
-        this.root = null;
-//        this.
-//        delete this.head
+
+        // uncomment to delete the actual node
+        //this.root = null;
     } else {
-        curr.parent.children.delDataWithID(id)
+
+        // Uncomment to delete the actual node
+        //curr.parent.children.delDataWithID(id)
     }
 };
 
@@ -490,6 +494,8 @@ Tree.prototype.applyDiff = function(diff){
             assertNonNull(diff.payload);
             assertDefined(diff.list_predecessor);
 
+            console.log('dafuq',diff.list_predecessor);
+
             this.insertNodeUsingID(diff);
             break;
         case 'update':
@@ -502,7 +508,7 @@ Tree.prototype.applyDiff = function(diff){
         case 'delete':
             assert(diff.payload===null,'Payload is not permitted on deletes');
             assert(diff.list_predecessor===null,'listPredecessor is not permitted on delete diffs');
-            this.deleteSubtreeWithID(diff.id);
+            this.deleteSubtreeWithID(diff);
 
 
             break;

@@ -282,24 +282,46 @@ function addComplexObjectsAndUpdateOneOfThem(){
 /**
  * Function called from the view to generate a tree and then insert a leaf
  */
-function addComplexObjectsAndInsertOneMoreUnderaLeaf(){
+function addComplexObjectsAndInsertOneMoreUnderaLeaf() {
     var t = addComplexObjects();
 
 
     var diff = new Diff();
-    diff.id = 1100;
+    diff.id = 1001;
+//    diff.list_predecessor = 12;
     diff.op = 'insert';
     diff.payload = {
-        id : 21321,
-        label : 'new label',
-        value : 'new value'
-    };
-    diff.list_predecessor = 11000;
+        newMarker: {
+            id: 321,
+            label: 'newMarker',
+            children: {
+                coords: {
+                    id: 3210,
+                    label: 'coords',
+                    children: {
+                        latitude: {
+                            id: 32100,
+                            label: 'latitude',
+                            value: 40
+                        },
+                        longitude: {
+                            id: 32101,
+                            label: 'longitude',
+                            value: 40
+                        }
 
+                    }
+                }
+            }
+        }
+    };
+
+    console.log(diff);
     t.applyDiff(diff);
     t.printBFS();
     t.printHashTable();
 }
+
 
 /**
  * Function called from the view to generate a tree and then insert an internal node
@@ -347,29 +369,34 @@ function addComplexObjectsAndInsertOneMoreUnderanInternal(){
 function addComplexObjectsAndInsertOneMoreUnderanInternalAtTheBeginningOfTheLinkedList(){
     var t = addComplexObjects();
 
-
-
-
-//    console.log(diff);
-//    t.applyDiff(diff);
-//    var JSON = {
-//        id:1,
-//        payload:{
-//            id : 21321,
-//            label : 'new label',
-//            value : 'new value'
-//        }
-////        listPredecessor: 2 // It's optional no value required when the id corresponds to a leaf
-//    };
-
     var diff = new Diff();
-    diff.id = 1;
-    diff.list_predecessor = undefined;
+    diff.id = 3;
+//    diff.list_predecessor = 12;
     diff.op = 'insert';
     diff.payload = {
-        id : 21321,
-        label : 'new label',
-        value : 'new value'
+        newMarker: {
+            id: 321,
+            label: 'newMarker',
+            children: {
+                coords: {
+                    id: 3210,
+                    label: 'coords',
+                    children: {
+                        latitude: {
+                            id: 32100,
+                            label: 'latitude',
+                            value: 40
+                        },
+                        longitude: {
+                            id: 32101,
+                            label: 'longitude',
+                            value: 40
+                        }
+
+                    }
+                }
+            }
+        }
     };
 
     console.log(diff);
@@ -377,12 +404,11 @@ function addComplexObjectsAndInsertOneMoreUnderanInternalAtTheBeginningOfTheLink
     t.printBFS();
     t.printHashTable();
 
-
 }
 
+
+
 // TODO: on update no label has to be given... Crush if it's given - Fixed
-// TODO: Clean the hashtables
-// TODO: create classes for insert diff, update diff etc...
 // TODO: Need another array that stores all entering diffs
 
 // TODO: About markers example
