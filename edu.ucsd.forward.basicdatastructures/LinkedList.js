@@ -333,6 +333,25 @@ LinkedList.prototype.get = function(i){
 };
 
 
+/**
+ * Get all elements that exist inside this linked list
+ * @returns {*}
+ */
+LinkedList.prototype.getAllElements = function(){
+
+
+    var toBeReturned = [];
+    var curr = this.head;
+    while(curr !== null){
+        toBeReturned.push(curr);
+
+        curr = curr.next;
+    }
+    return toBeReturned;
+
+};
+
+
 
 
 

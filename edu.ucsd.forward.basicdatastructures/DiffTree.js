@@ -217,6 +217,7 @@ Tree.prototype.printHashTable = function(){
  * @param parent
  * @param jsonSubtree
  * @param labelIfPrimitive
+ * @param predecessor
  */
 
 
@@ -242,6 +243,9 @@ Tree.prototype.addSubtreeV2 = function(parent, jsonSubtree,labelIfPrimitive,pred
                 newTreeNode.children = new LinkedList();
 
                 newTreeNode.id = jsonSubtree.id;
+
+                if(jsonSubtree.annotations !== undefined)
+                    newTreeNode.annotations = jsonSubtree.annotations;
                 if(labelIfPrimitive===null)
                     newTreeNode.label = jsonSubtree.label;
                 else
@@ -331,7 +335,7 @@ Tree.prototype.deleteSubtree = function(JSON){
 
 /**
  * This function deletes a node with a specific id
- * @param id
+ * @param annotation
  */
 Tree.prototype.deleteSubtreeWithID = function(annotation){
     var id = annotation.id;
@@ -363,12 +367,16 @@ Tree.prototype.updateNode = function(JSON){
         assertNonNull(JSON);
         assertObject(JSON);
         assert(JSON.hasOwnProperty('id'),'JSON does not have property: id');
-        this.updateNodeUsingID(JSON.id,JSON.payload);
+        this.updateNodeUsingAnnotation(JSON.id,JSON.payload);
 
 
 };
 
-Tree.prototype.updateNodeUsingID =  function(id,payload){
+Tree.prototype.updateNodeUsingAnnotation =  function(annotation){
+
+
+    var id = annotation.id;
+    var payload = annotation.payload;
 
     assertNumber(id);
     assertDefined(payload);
@@ -377,7 +385,58 @@ Tree.prototype.updateNodeUsingID =  function(id,payload){
 
     var curr = this.TreeHashTable.getTreeNode(id);
     console.log("about to update node:",curr);
-    curr.value = payload.value;
+    console.log('using annotation:',annotation);
+    for (var att in payload) {
+        if (payload.hasOwnProperty(att)) {
+
+            // clear out the hash element
+            this.TreeHashTable.remove(curr.id);
+
+            curr.id = payload[att].id;
+            curr.label = payload[att].label;
+            curr.value = payload[att].value;
+
+            curr.annotations.add(annotation);
+
+            // children
+            if (curr.children === null) {
+                // the parent is a leaf we need to add children to it
+                curr.isLeaf = true;
+            }
+            else {
+                // Get all the children of the previous node and delete them
+                // from the tree hash table
+                var allElems = curr.children.getAllElements();
+                for (var jj=0;jj<allElems.length;jj++){
+                        this.BFSHashDeallocation(allElems[jj].data);
+                }
+                curr.children = null;
+
+                var pred = null;
+                for (var att2 in payload[att].children) {
+                    if (payload[att].children.hasOwnProperty(att2)) {
+                        // Create a new tree node for each child
+
+                        var currChild = payload[att].children[att2];
+
+
+//                        var newTreeNode = new TreeNode();
+                        if (currChild.children !== null) {
+                            curr.children = new LinkedList();
+                        }
+
+                        this.TreeHashTable.add(curr);
+                        this.addSubtreeV2(curr, currChild, null, pred);
+                        pred = currChild.id;
+
+                    }
+                }
+//                parent.children.addDataAfterID(listPredecessor, newChild);
+
+
+            }
+        }
+    }
 
 };
 
@@ -396,37 +455,15 @@ Tree.prototype.insertNode = function(JSON){
     assertNonNull(JSON);
     assertObject(JSON);
     assert(JSON.hasOwnProperty('id'),'JSON does not have property: id');
-    this.insertNodeUsingID(JSON.id,JSON.payload,JSON.listPredecessor);
+    this.insertNodeUsingAnnotation(JSON.id,JSON.payload,JSON.listPredecessor);
 
 
 };
 
 
 
-//
-//// The ID of a node
-//this.id = null;
-//
-//// the name of the node/edge
-//this.label = null;
-//
-//// the value of the node if it's a leaf
-//this.value = null;
-//
-//// The parent of the current node
-//this.parent = null;
-//
-//// children
-//this.children = null;
-//
-//// is leaf?
-//this.isLeaf = false;
-//
-//// available annotations
-//this.annotations = [];
 
-
-Tree.prototype.insertNodeUsingID = function(annotation){
+Tree.prototype.insertNodeUsingAnnotation = function(annotation){
 
 
     var id = annotation.id;
@@ -494,16 +531,14 @@ Tree.prototype.applyDiff = function(diff){
             assertNonNull(diff.payload);
             assertDefined(diff.list_predecessor);
 
-            console.log('dafuq',diff.list_predecessor);
-
-            this.insertNodeUsingID(diff);
+            this.insertNodeUsingAnnotation(diff);
             break;
         case 'update':
             assertDefined(diff.payload);
             assertNonNull(diff.payload);
             assert(diff.list_predecessor===null,'listPredecessor is not permitted on update diffs');
             assert(diff.payload.label===undefined, 'label is not permitted on updates');
-            this.updateNodeUsingID(diff.id,diff.payload);
+            this.updateNodeUsingAnnotation(diff);
             break;
         case 'delete':
             assert(diff.payload===null,'Payload is not permitted on deletes');

@@ -266,10 +266,32 @@ function addComplexObjectsAndUpdateOneOfThem(){
 
     // create diff
     var diff = new Diff();
-    diff.id = 1100;
+    diff.id = 12;
     diff.op = 'update';
     diff.payload = {
-        value : 'new value'
+        newMarker: {
+            id: 321,
+            label: 'newMarker',
+            children: {
+                coords: {
+                    id: 3210,
+                    label: 'coords',
+                    children: {
+                        latitude: {
+                            id: 32100,
+                            label: 'latitude',
+                            value: 40
+                        },
+                        longitude: {
+                            id: 32101,
+                            label: 'longitude',
+                            value: 40
+                        }
+
+                    }
+                }
+            }
+        }
     };
 
     console.log(diff);
