@@ -220,7 +220,7 @@ Tree.prototype.printHashTable = function(){
  */
 
 
-Tree.prototype.addSubtreeV2 = function(parent, jsonSubtree,labelIfPrimitive){
+Tree.prototype.addSubtreeV2 = function(parent, jsonSubtree,labelIfPrimitive,list_predecessor){
 //    console.log('arguments:','parent:',parent,'node:',jsonSubtree);
 
     if (typeof jsonSubtree == 'object') {
@@ -235,6 +235,7 @@ Tree.prototype.addSubtreeV2 = function(parent, jsonSubtree,labelIfPrimitive){
             assertNonNull(jsonSubtree);
             assertObject(jsonSubtree);
 
+            var prevID=null;
             if (jsonSubtree.hasOwnProperty('children')) {
                 // it's an internal node
                 var newTreeNode = new TreeNode();
@@ -252,7 +253,7 @@ Tree.prototype.addSubtreeV2 = function(parent, jsonSubtree,labelIfPrimitive){
                     if (jsonSubtree.children.hasOwnProperty(att)) {
 
                         if (jsonSubtree.children[att].hasOwnProperty('children')) {
-                            this.addSubtreeV2(newTreeNode, jsonSubtree.children[att],att);
+                            this.addSubtreeV2(newTreeNode, jsonSubtree.children[att],att,jsonSubtree.children[att].id);
                         }else{
                             var newChild = new TreeNode();
                             newChild.label = att;
@@ -260,7 +261,8 @@ Tree.prototype.addSubtreeV2 = function(parent, jsonSubtree,labelIfPrimitive){
                             newChild.value = jsonSubtree.children[att].value;
                             newChild.id = jsonSubtree.children[att].id;
                             this.TreeHashTable.add(newChild);
-                            newTreeNode.children.pushData(newChild);
+                            newTreeNode.children.addDataAfterID(prevID,newChild);
+                            prevID = newChild.id;
                             newChild.parent = newTreeNode;
 
                         }
@@ -278,7 +280,7 @@ Tree.prototype.addSubtreeV2 = function(parent, jsonSubtree,labelIfPrimitive){
                         //                    parent.children = new LinkedList();
                         newTreeNode.parent = parent;
                         this.TreeHashTable.add(newTreeNode);
-                        parent.children.pushData(newTreeNode);
+                        parent.children.addDataAfterID(list_predecessor,newTreeNode);
                     }
                 }
             }
@@ -300,7 +302,7 @@ Tree.prototype.addSubtreeV2 = function(parent, jsonSubtree,labelIfPrimitive){
  * @param JSON
  */
 Tree.prototype.generateTree = function(JSON){
-    this.addSubtreeV2(null,JSON,null)
+    this.addSubtreeV2(null,JSON,null,null)
 };
 
 
