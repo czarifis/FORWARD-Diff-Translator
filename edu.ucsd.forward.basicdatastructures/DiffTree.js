@@ -76,6 +76,10 @@ function Tree(){
 //    this.height = 0;
 
     this.TreeHashTable = new TreeHashTable();
+
+    this.diffs = new DiffList();
+
+
 }
 
 
@@ -210,6 +214,13 @@ Tree.prototype.printHashTable = function(){
     console.log('Tree Hash Table:', this.TreeHashTable);
 };
 
+
+/**
+ * This function prints the list with all the applied diffs on this "digest" cycle.
+ */
+Tree.prototype.printDiffs = function(){
+    console.log('diffList:',this.diffs);
+};
 
 /**
  * Given one JSON file (with the structure we defined)
@@ -531,6 +542,8 @@ Tree.prototype.applyDiff = function(diff){
             assertDefined(diff.list_predecessor);
 
             this.insertNodeUsingAnnotation(diff);
+
+            this.diffs.pushDiff(diff);
             break;
         case 'update':
             assertDefined(diff.payload);
@@ -538,11 +551,13 @@ Tree.prototype.applyDiff = function(diff){
             assert(diff.list_predecessor===null,'listPredecessor is not permitted on update diffs');
             assert(diff.payload.label===undefined, 'label is not permitted on updates');
             this.updateNodeUsingAnnotation(diff);
+            this.diffs.pushDiff(diff);
             break;
         case 'delete':
             assert(diff.payload===null,'Payload is not permitted on deletes');
             assert(diff.list_predecessor===null,'listPredecessor is not permitted on delete diffs');
             this.deleteSubtreeWithID(diff);
+            this.diffs.pushDiff(diff);
 
 
             break;

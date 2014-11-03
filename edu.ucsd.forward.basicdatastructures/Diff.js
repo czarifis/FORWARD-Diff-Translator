@@ -22,3 +22,37 @@ function Diff() {
     this.list_predecessor = null;
 
 }
+
+
+
+function DiffList(){
+        this.diffs = [];
+
+}
+
+DiffList.prototype.getDiff = function(i) {
+    assertNonNull(i);
+    assertDefined(i);
+    assertNumber(i);
+    if (i<this.diffs.length) {
+        return this.diffs[i];
+    } else {
+        return null;
+    }
+};
+
+DiffList.prototype.pushDiff = function(diff) {
+    assertNonNull(diff);
+    assertDefined(diff);
+    assertObject(diff);
+    this.diffs.push(diff);
+};
+
+DiffList.prototype.popDiff = function() {
+
+    this.diffs.pop();
+};
+
+DiffList.prototype.shift = function(){
+    this.diffs.shift();
+};

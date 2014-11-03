@@ -256,6 +256,7 @@ function addComplexObjectsAndDeleteOneOfThem(){
 
     t.printBFS();
     t.printHashTable();
+    t.printDiffs();
 }
 
 /**
@@ -299,6 +300,7 @@ function addComplexObjectsAndUpdateOneOfThem(){
 
     t.printBFS();
     t.printHashTable();
+    t.printDiffs();
 }
 
 /**
@@ -342,6 +344,7 @@ function addComplexObjectsAndInsertOneMoreUnderaLeaf() {
     t.applyDiff(diff);
     t.printBFS();
     t.printHashTable();
+    t.printDiffs();
 }
 
 
@@ -384,6 +387,7 @@ function addComplexObjectsAndInsertOneMoreUnderanInternal(){
     t.applyDiff(diff);
     t.printBFS();
     t.printHashTable();
+    t.printDiffs();
 
 }
 
@@ -425,12 +429,12 @@ function addComplexObjectsAndInsertOneMoreUnderanInternalAtTheBeginningOfTheLink
     t.applyDiff(diff);
     t.printBFS();
     t.printHashTable();
+    t.printDiffs();
 
 }
 
 
 
-// TODO: on update no label has to be given... Crush if it's given - Fixed
 // TODO: Need another array that stores all entering diffs
 
 // TODO: About markers example
